@@ -45,9 +45,31 @@ There is definitely a significant difference displayed within the boxplot as GRA
 
 ### Numerical Descriptive Results
 
+```{r}
+favstats(WORDSUM~DEGREE,data=GSScsv)
+```    
+
+GRADUATE has a 01 of 10 compared to the Q3 of LT HIGH SCHOOL is 8.25 and the Q9 of High school is & despite its high Numbers of 85 people. This is important since the number of people in HIGH SCHOOL is almost the combined number of all other DEGREE $ showing that there is great difference between these values.   
+
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
 ## Inferential Results
+
+```{r}
+model1 <- aov(WORDSUM~DEGREE,data=GSScsv)
+summary.aov(model1)
+```
+
+The P-Value is 0.000236 meaning there is a statistical diffrence within these results so further testing is required to see the diffrence
+
+```{r}
+#we specify the margins starting at the bottom and proceeding clockwise - thus 8.7 is the left side margin to hold the names of the factors
+par(mar = c(3, 17, 2, 2))
+plot(TukeyHSD(model1, conf.level = 0.98), las=2,)
+```
+
+The difference is obvious within this graph as the LT HIGH SCHOOL-GRADUATE and the HIGH SCHOOL GRADUATE are below 0 showing that there is a significant difference when it is compared to the other DEGREEs.
+
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
